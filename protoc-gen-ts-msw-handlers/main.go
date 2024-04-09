@@ -33,6 +33,9 @@ func main() {
 			if strings.Contains(*protoFile.Proto.Name, "third_party") || strings.Contains(*protoFile.Proto.Name, "google") {
 				continue
 			}
+			for _, enum := range protoFile.Enums {
+				enumToType(g, enum)
+			}
 			for _, message := range protoFile.Messages {
 				messageToType(g, message)
 			}
@@ -56,7 +59,7 @@ func exportAsOneVariable(g *protogen.GeneratedFile, fileNames []string, handlerN
 }
 
 func serviceToHandler(gen *protogen.Plugin, service *protogen.Service) (string, string) {
-	filename := service.GoName + "/handlers.ts"
+	filename := "handlers/" + service.GoName + "/handlers.ts"
 	handlerName := ""
 	g := gen.NewGeneratedFile(filename, "")
 	g.P("/* eslint-disable */")
@@ -170,7 +173,13 @@ func messageToType(g *protogen.GeneratedFile, message *protogen.Message) {
 	g.P("export type ", message.GoIdent.GoName, " = {")
 	for _, field := range message.Fields {
 		if field.Desc.Message() != nil {
-			g.P("  ", utils.ToLowerCamelCase(field.GoName), ": ", field.Desc.Message().Name(), ";")
+			listContext := ""
+			if field.Desc.IsList() {
+				listContext = "[]"
+			}
+			g.P("  ", utils.ToLowerCamelCase(field.GoName), ": ", field.Desc.Message().Name(), listContext, ";")
+		} else if field.Desc.Enum() != nil {
+			g.P("  ", utils.ToLowerCamelCase(field.GoName), ": ", field.Desc.Enum().Name(), ";")
 		} else {
 			g.P("  ", utils.ToLowerCamelCase(field.GoName), ": ", utils.TypeConvert(field.Desc.Kind().String()), ";")
 		}
@@ -178,9 +187,12 @@ func messageToType(g *protogen.GeneratedFile, message *protogen.Message) {
 	g.P("}")
 }
 
-func getFinalContext(str string) string {
-	split := strings.Split(str, "/")
-	return split[len(split)-1]
+func enumToType(g *protogen.GeneratedFile, enum *protogen.Enum) {
+	enumContext := ""
+	for _, value := range enum.Values {
+		enumContext += "'" + string(value.Desc.Name()) + "'" + " | "
+	}
+	g.P("export type ", enum.GoIdent.GoName, " = ", enumContext[:len(enumContext)-2], ";")
 }
 
 func getPathAndMethod(rule *option.HttpRule) (string, string) {
@@ -203,9 +215,9 @@ func getPathAndMethod(rule *option.HttpRule) (string, string) {
 }
 
 func removeUselessString(s string) string {
-	// replace {} @ _ -
 	return strings.ReplaceAll(strings.ReplaceAll(strings.ReplaceAll(strings.ReplaceAll(s, "{", ""), "}", ""), "@", ""), "-", "")
 }
+
 func pathToMethodName(path string) string {
 	if path == "" {
 		return ""
