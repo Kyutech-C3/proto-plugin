@@ -12,7 +12,7 @@ all: build gen
 
 gen:
 	@mkdir -p $(PROTO_OUT_DIR)
-	@protoc -I. --plugin=./$(PROTO_PLUGIN_FILE) --$(PROTO_PLUGIN_NAME)_out=. --go_out=$(PROTO_OUT_DIR) $(PROTO_FILES)
+	@protoc -I. --plugin=./$(PROTO_PLUGIN_FILE) --$(PROTO_PLUGIN_NAME)_out=sample --go_out=$(PROTO_OUT_DIR) $(PROTO_FILES)
 
 build:
 	@go build -o $(PROTO_PLUGIN_FILE) .
