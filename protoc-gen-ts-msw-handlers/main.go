@@ -92,7 +92,7 @@ func generateMethod(g *protogen.GeneratedFile, method *protogen.Method) string {
 	if path != "" {
 		methodName := getHandlerName(path, apiMethod)
 		g.P("const ", methodName, " = http.", apiMethod, "(", "'", path, "'", ",() => {")
-		g.P("  return new HttpResponse.json({")
+		g.P("  return HttpResponse.json({")
 		for _, field := range method.Output.Fields {
 			GenerateField(g, field)
 		}
