@@ -6,24 +6,19 @@ const V1TagsGetHandler = http.get('/v1/tags',() => {
   return HttpResponse.json({
     tags:[
     {
-    id:'0a87d6fd-7ba1-4b51-b395-c602a007c564',
-    name:'Darlene Schulist I',
-    color:'#4777F5',
+    id:'debc5657-bcd3-41fa-a059-7d0fb7f39335',
+    name:'Mr. Braeden Sipes',
+    color:'#013008',
     },
     {
-    id:'0f891074-e289-464c-8fd2-96e9b535a3cd',
-    name:'Darlene Schulist I',
-    color:'#4777F5',
+    id:'0897c1b8-f581-475d-ae9a-99659b4c7951',
+    name:'Mr. Braeden Sipes',
+    color:'#013008',
     },
     {
-    id:'f0bca1a6-93ec-48d4-84bc-4ac1e675afd0',
-    name:'Darlene Schulist I',
-    color:'#4777F5',
-    },
-    {
-    id:'1d3b0440-b6e1-479f-a865-899cd7b3b100',
-    name:'Darlene Schulist I',
-    color:'#4777F5',
+    id:'cf018a39-b305-4f41-a7d7-f16738118b31',
+    name:'Mr. Braeden Sipes',
+    color:'#013008',
     },
     ],
   })
