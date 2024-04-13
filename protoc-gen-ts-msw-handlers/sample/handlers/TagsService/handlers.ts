@@ -6,19 +6,29 @@ const V1TagsGetHandler = http.get('/v1/tags',() => {
   return HttpResponse.json({
     tags:[
     {
-    id:'debc5657-bcd3-41fa-a059-7d0fb7f39335',
-    name:'Mr. Braeden Sipes',
-    color:'#013008',
+    id:'14c970f6-f6d7-4889-9356-04ff30f42703',
+    name:'Elmo Sauer Jr.',
+    color:'#B71800',
     },
     {
-    id:'0897c1b8-f581-475d-ae9a-99659b4c7951',
-    name:'Mr. Braeden Sipes',
-    color:'#013008',
+    id:'06b46e9f-5fb8-461f-a116-89af32f8d8e3',
+    name:'Elmo Sauer Jr.',
+    color:'#B71800',
     },
     {
-    id:'cf018a39-b305-4f41-a7d7-f16738118b31',
-    name:'Mr. Braeden Sipes',
-    color:'#013008',
+    id:'6d1ca9f8-7189-48df-8920-496152210884',
+    name:'Elmo Sauer Jr.',
+    color:'#B71800',
+    },
+    {
+    id:'a08b7b54-0ee3-4cfc-9650-fb4c7aeb9383',
+    name:'Elmo Sauer Jr.',
+    color:'#B71800',
+    },
+    {
+    id:'4330442d-7b9a-4dcd-95e4-6a047e22b37d',
+    name:'Elmo Sauer Jr.',
+    color:'#B71800',
     },
     ],
   })

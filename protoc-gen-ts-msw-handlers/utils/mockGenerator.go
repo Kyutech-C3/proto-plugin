@@ -9,7 +9,7 @@ import (
 
 func MockGenerator(key string, propType string) string {
 	if strings.Contains(key, "url") {
-		return string(faker.New().Internet().URL())
+		return string("https://placehold.jp/150x150.png")
 	}
 	if strings.Contains(key, "name") {
 		return string(faker.New().Person().Name())

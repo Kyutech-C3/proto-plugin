@@ -118,8 +118,27 @@ func GenerateField(g *protogen.GeneratedFile, field interface{}) {
 							GenerateField(g, a)
 							g.P("    },")
 						} else {
-
-							g.P("    ", utils.UpperCamelToSnake(v.Desc.Message().Fields().Get(i).JSONName()), ":", "'", utils.MockGenerator(utils.UpperCamelToSnake(v.Desc.Message().Fields().Get(i).JSONName()), v.Desc.Message().Fields().Get(i).Kind().String()), "'", ",")
+							if v.Desc.Message().Fields().Get(i).IsList() {
+								fields := v.Desc.Message().Fields().Get(i).Message().Fields()
+								g.P("    ", utils.UpperCamelToSnake(v.Desc.Message().Fields().Get(i).JSONName()), ":", "[")
+								for i := 0; i < rand.Intn(10); i++ {
+									g.P("    {")
+									for i := 0; i < fields.Len(); i++ {
+										if fields.Get(i).HasPresence() {
+											a := fields.Get(i).Message().Fields()
+											g.P("    ", utils.UpperCamelToSnake(fields.Get(i).JSONName()), ":{")
+											GenerateField(g, a)
+											g.P("    },")
+										} else {
+											g.P("    ", utils.UpperCamelToSnake(fields.Get(i).JSONName()), ":", "'", utils.MockGenerator(utils.UpperCamelToSnake(fields.Get(i).JSONName()), fields.Get(i).Kind().String()), "'", ",")
+										}
+									}
+									g.P("    },")
+								}
+								g.P("    ],")
+							} else {
+								g.P("    ", utils.UpperCamelToSnake(v.Desc.Message().Fields().Get(i).JSONName()), ":", "'", utils.MockGenerator(utils.UpperCamelToSnake(v.Desc.Message().Fields().Get(i).JSONName()), v.Desc.Message().Fields().Get(i).Kind().String()), "'", ",")
+							}
 						}
 					}
 					g.P("    },")
