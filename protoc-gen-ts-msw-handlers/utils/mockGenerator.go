@@ -1,6 +1,7 @@
 package utils
 
 import (
+	"fmt"
 	"math/rand"
 	"strings"
 
@@ -40,6 +41,9 @@ func MockGenerator(key string, propType string) string {
 	}
 	if strings.Contains(key, "description") || strings.Contains(key, "profile") {
 		return string(faker.New().Lorem().Sentence(40))
+	}
+	if strings.Contains(key, "count") {
+		return fmt.Sprint(rand.Intn(100))
 	}
 
 	return ""

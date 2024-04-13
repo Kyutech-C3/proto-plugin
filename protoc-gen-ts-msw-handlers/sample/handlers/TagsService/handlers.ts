@@ -6,29 +6,19 @@ const V1TagsGetHandler = http.get('/v1/tags',() => {
   return HttpResponse.json({
     tags:[
     {
-    id:'14c970f6-f6d7-4889-9356-04ff30f42703',
-    name:'Elmo Sauer Jr.',
-    color:'#B71800',
+    id:'d10db55b-aa9a-470f-b56d-c6e913a2d73f',
+    name:'Roger Dooley',
+    color:'#66E667',
     },
     {
-    id:'06b46e9f-5fb8-461f-a116-89af32f8d8e3',
-    name:'Elmo Sauer Jr.',
-    color:'#B71800',
+    id:'09e00903-ec91-46ee-ae90-7cebc4f28add',
+    name:'Roger Dooley',
+    color:'#66E667',
     },
     {
-    id:'6d1ca9f8-7189-48df-8920-496152210884',
-    name:'Elmo Sauer Jr.',
-    color:'#B71800',
-    },
-    {
-    id:'a08b7b54-0ee3-4cfc-9650-fb4c7aeb9383',
-    name:'Elmo Sauer Jr.',
-    color:'#B71800',
-    },
-    {
-    id:'4330442d-7b9a-4dcd-95e4-6a047e22b37d',
-    name:'Elmo Sauer Jr.',
-    color:'#B71800',
+    id:'5149d8bb-c3e9-4f06-af86-7d2624ed6788',
+    name:'Roger Dooley',
+    color:'#66E667',
     },
     ],
   })
